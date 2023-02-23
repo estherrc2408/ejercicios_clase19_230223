@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        let nombre;
+        let nota;
+
+        const arrayAlumnos = [
+            { id: 1, nombre: 'Pepe' },
+            { id: 2, nombre: 'Ana' },
+            { id: 3, nombre: 'Juan' },
+            { id: 4, nombre: 'Pepi' },
+            { id: 5, nombre: 'bea' }
+        ];
+
+
+        const arrayNotas = [
+            { id: 1, nota: 8 },
+            { id: 2, nota: 7 },
+            { id: 5, nota: 9 },
+            { id: 3, nota: 5 }
+        ];
+
+        const arrayBecas = [
+            { id: 1, beca: 'si' },
+            { id: 2, beca: 'no' },
+            { id: 5, beca: 'si' },
+        ]
+
+        const id = 2;
+
+        const getAlumnos = async (id) => {
+            const alumno = arrayAlumnos.find((item) => item.id === id)
+            if (!alumno) {
+                throw (`El alumno ${nombre} con id ${id} no existe`);
+            } else {
+                console.log(alumno);//objeto
+                return (alumno);
+            }
+        }
+
+        const getNotas = async (id, nombre) => {
+            const nota = arrayNotas.find((item) => item.id === id)
+            if (!nota) {
+                throw (`El alumno ${nombre} no tiene nota`);
+            } else {
+                console.log(nota);
+                return (nota);
+            }
+        }
+
+        const getBecas = async (id, nombre, nota) => {
+            const beca = arrayBecas.find((item) => item.id === id)
+            if (!beca) {
+                throw (`El alumno ${nombre} con nota ${nota} no ha solicitado la beca`);
+            } else {
+                console.log(beca);
+                return (beca);
+            }
+        }
+
+        const getDatos = async (id) => {
+            try{
+            const { nombre } = await getAlumnos(id)//desestructuracion del objeto alumno {id: , nombre:} para que nos de solo el nombre
+            console.log(nombre);
+            const { nota } = await getNotas(id, nombre)//desestructuracion del objeto nota
+            console.log(nota);
+            const { beca } = await getBecas(id, nombre, nota)//desestructuracion del objeto beca
+            return console.log(`${nombre}, tiene una nota de ${nota} y ${beca} ha recibido la beca`);
+            }
+            catch(error){
+                console.log(error);
+            }
+        }
+getDatos(id);
+
+/*        getDatos(id)
+            .then((resp) => { console.log(resp) })//podemos hacerlo asi o con try catch
+            .catch((error) => { console.log(error) })
+*/
+
+    </script>
+</body>
+
+</html>

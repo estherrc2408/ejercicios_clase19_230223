@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const cosa = ()=>{
+            //clases en mayuscula
+            const promise = new Promise((resolve,reject)=>{//requiere una f callback que requiere a su vez otras dos callback reject y result
+                /*otra opcion para ahorrarnos el return sera poner:
+                return new Promise((resolve,reject)=>{})*/
+                if(true){//entrara por el resolve, si le ponemos !true entrara por el reject
+                    resolve('todo bien');//envian como argumento la respuesta, lo que queramos que pasemos a la base de datos o al navegador
+                }else{
+                    reject('todo mal');//envian como argumento la respuesta, lo que queramos que pasemos a la base de datos o al navegador
+                }
+            })
+
+            return promise;
+        }
+        cosa()//contiene un objetos
+            .then((resp)=>{console.log(resp)})//recibe la respuesta positiva, el resolve
+            .catch((error)=>{console.log(error)})//recibe la negativa, por eso le ponemos error, el reject
+            .finally(()=>{console.log('Entra en el finally')})//siempre entra en el finally, indistintamente de la respuesta, se puede omitir si no nos aporta nada
+    </script>
+</body>
+</html>
